@@ -1,10 +1,11 @@
 ﻿namespace ChatExamination;
 using SocketIOClient;
 
-class Message
+public class Message
 {
     public string Text { get; set; }
     public string Sender { get; set; }
+    public string Time { get; set; }
 }
 
 class Program
@@ -44,10 +45,11 @@ class Program
             var message =  new Message
             {
                 Sender = userName,
-                Text = input
+                Text = input,
+                Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm")
             };
             
-            await SocketManager.SendMessage(userName, input);
+            await SocketManager.SendMessage(message);
         }
         
         Console.WriteLine("Exiting program");
