@@ -42,9 +42,9 @@ public class SocketManager
         Console.WriteLine($"Connected: {_client.Connected}");
     }
 
-    public static async Task SendMessage(string message)
+    public static async Task SendMessage(string userName, string message)
     {
-        await  _client.EmitAsync("message", message);
-        Console.WriteLine($"You said: {message}");
+        await  _client.EmitAsync("message", $"{userName}: {message}");
+        Console.WriteLine($"{userName} said: {message}");
     }
 }

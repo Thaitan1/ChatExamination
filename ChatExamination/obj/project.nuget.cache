@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b/o29Z5kpkk=",
+  "dgSpecHash": "69pZip6Y8qc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\RiderProjects\\ChatExamination\\ChatExamination\\ChatExamination.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\ChatExamitation\\ChatExamination\\ChatExamination.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\socketio.core\\3.1.2\\socketio.core.3.1.2.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\socketio.serializer.core\\3.1.2\\socketio.serializer.core.3.1.2.nupkg.sha512",

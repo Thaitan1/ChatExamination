@@ -14,7 +14,7 @@ class Program
         Console.WriteLine("Pick a username:");
         var userName = Console.ReadLine();
 
-        while (userName == "")
+        while (string.IsNullOrWhiteSpace(userName))
         {
             Console.WriteLine("Please enter username:");
             userName = Console.ReadLine();
@@ -23,11 +23,34 @@ class Program
         Console.WriteLine($"Your username is: {userName}");
     
         await SocketManager.Connect();
+        
+        Console.WriteLine("Enter message or type /exit to exit program.");
 
         while (true)
         {
+            string input =  Console.ReadLine();
+            
+            if (string.IsNullOrWhiteSpace(input))
+                continue;
 
+            if (input == "/history")
+            {
+                
+            }
+            
+            if (input == "/exit")
+                break;
+                
+            var message =  new Message
+            {
+                Sender = userName,
+                Text = input
+            };
+            
+            await SocketManager.SendMessage(userName, input);
         }
+        
+        Console.WriteLine("Exiting program");
     }
 }
         
