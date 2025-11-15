@@ -10,9 +10,10 @@ public class SocketManager
     static SocketManager()
     {
         messages = [];
+        //messages.Add($"{message.Time} {message.Sender} {message.Text}");
     }
 
-    public static async Task Connect()
+    public static async Task Connect(string userName)
     {
         _client = new SocketIO("wss://api.leetcode.se", new SocketIOOptions
         {
@@ -25,13 +26,27 @@ public class SocketManager
             Console.WriteLine($"Received message: {receivedMessage}");
         });
 
-        _client.OnConnected += (sender, args) =>
+        _client.On("userJoined", response =>
+        {
+            string newUser = response.GetValue<string>();
+            Console.WriteLine($"{userName} Joined chat");
+        });
+
+        _client.On("userLeft", response =>
+        {
+            string newUser = response.GetValue<string>();
+            Console.WriteLine($"{userName} Left chat");
+        });
+
+        _client.OnConnected += async (sender, args) =>
         {
             Console.WriteLine("Connected");
+            await _client.EmitAsync("userJoined", userName);
         };
         
-        _client.OnDisconnected += (sender, args) =>
+        _client.OnDisconnected += async (sender, args) =>
         {
+            await _client.EmitAsync("userLeft", userName);
             Console.WriteLine("Disconnected");
         };
         
@@ -44,7 +59,7 @@ public class SocketManager
 
     public static async Task SendMessage(Message message)
     {
-        await  _client.EmitAsync("message", message);
+        await _client.EmitAsync("message", message);
         Console.WriteLine($"{message.Time} {message.Sender} said: {message.Text}");
     }
 }

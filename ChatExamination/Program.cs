@@ -23,7 +23,7 @@ class Program
 
         Console.WriteLine($"Your username is: {userName}");
     
-        await SocketManager.Connect();
+        await SocketManager.Connect(userName);
         
         Console.WriteLine("Enter message or type /exit to exit program.");
 
@@ -36,7 +36,7 @@ class Program
 
             if (input == "/history")
             {
-                
+                //Console.WriteLine(messages);
             }
             
             if (input == "/exit")
@@ -46,7 +46,7 @@ class Program
             {
                 Sender = userName,
                 Text = input,
-                Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm")
+                Time = DateTime.Now.ToString("yy-MM-dd HH:mm")
             };
             
             await SocketManager.SendMessage(message);
