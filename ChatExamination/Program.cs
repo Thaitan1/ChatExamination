@@ -36,7 +36,7 @@ class Program
 
             if (input == "/history")
             {
-                foreach (string msg in SocketManager.chatHistory)
+                foreach (string msg in SocketManager.ChatHistory)
                 {
                     Console.WriteLine(msg);
                 }
