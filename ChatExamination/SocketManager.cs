@@ -5,13 +5,7 @@ public class SocketManager
 {
     private static SocketIO _client;
     private static readonly string Path = "/sys25d";
-    public static List<string> messages;
-
-    static SocketManager()
-    {
-        messages = [];
-        //messages.Add($"{message.Time} {message.Sender} {message.Text}");
-    }
+    public static List<string> chatHistory = new();
 
     public static async Task Connect(string userName)
     {
@@ -24,6 +18,7 @@ public class SocketManager
         {
             string receivedMessage = response.GetValue<string>();
             Console.WriteLine($"Received message: {receivedMessage}");
+            chatHistory.Add(receivedMessage);
         });
 
         _client.On("userJoined", response =>
@@ -57,8 +52,10 @@ public class SocketManager
         Console.WriteLine($"Connected: {_client.Connected}");
     }
 
-    public static async Task SendMessage(Message message)
+    public static async Task SendMessage(Messages message)
     {
+        string ownMessage = $"{message.Time}: You said: {message.Text}";
+        chatHistory.Add(ownMessage);
         await _client.EmitAsync("message", message);
         Console.WriteLine($"{message.Time} {message.Sender} said: {message.Text}");
     }

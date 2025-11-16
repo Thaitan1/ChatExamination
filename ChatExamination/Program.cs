@@ -1,13 +1,13 @@
 ﻿namespace ChatExamination;
 using SocketIOClient;
 
-public class Message
+/*public class Message
 {
     public string Text { get; set; }
     public string Sender { get; set; }
     public string Time { get; set; }
 }
-
+*/
 class Program
 {
     static async Task Main(string[] args)
@@ -25,7 +25,8 @@ class Program
     
         await SocketManager.Connect(userName);
         
-        Console.WriteLine("Enter message or type /exit to exit program.");
+        Console.WriteLine("Type /exit to exit or type /history to see earlier messages");
+        Console.WriteLine("Enter message: ");
 
         while (true)
         {
@@ -36,13 +37,17 @@ class Program
 
             if (input == "/history")
             {
-                //Console.WriteLine(messages);
+                foreach (string msg in SocketManager.chatHistory)
+                {
+                    Console.WriteLine(msg);
+                }
+                continue;
             }
             
             if (input == "/exit")
                 break;
                 
-            var message =  new Message
+            var message =  new Messages
             {
                 Sender = userName,
                 Text = input,
