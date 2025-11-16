@@ -17,15 +17,22 @@ class Program
     
         await SocketManager.Connect(userName);
         
-        Console.WriteLine("Type /exit to exit or type /history to see earlier messages");
+        Console.WriteLine("Commands: /help , /exit , /history");
         Console.WriteLine("Enter message: ");
 
         while (true)
         {
+            string time = DateTime.Now.ToString("yy-MM-dd HH:mm");
             string input =  Console.ReadLine();
             
             if (string.IsNullOrWhiteSpace(input))
                 continue;
+
+            if (input == "/help")
+            {
+                Console.WriteLine("Type /exit to exit or /history to see earlier messages");
+                    continue;
+            }
 
             if (input == "/history")
             {
@@ -41,13 +48,9 @@ class Program
                 await SocketManager.Disconnect(userName);
                 break;
             }
-                
-            var message =  new Messages
-            {
-                Sender = userName,
-                Text = input,
-                Time = DateTime.Now.ToString("yy-MM-dd HH:mm")
-            };
+
+            var message = new Messages(input, userName, time);
+
             
             await SocketManager.SendMessage(message);
         }

@@ -17,8 +17,10 @@ public class SocketManager
         _client.On("message:", response =>
         {
             string receivedMessage = response.GetValue<string>();
-            Console.WriteLine($"{userName} said: {receivedMessage}");
-            chatHistory.Add(receivedMessage);
+            string time = DateTime.Now.ToString("yy-MM-dd HH:mm");
+            Console.WriteLine($"{time} {userName} said: {receivedMessage}");
+            string saveMsg = $"{time}: {userName} said: {receivedMessage}";
+            chatHistory.Add(saveMsg);
         });
 
         _client.On("Joined:", response =>
