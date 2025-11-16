@@ -14,34 +14,26 @@ public class SocketManager
             Path = Path
         });
 
-        _client.On("message", response =>
+        _client.On("message:", response =>
         {
             string receivedMessage = response.GetValue<string>();
-            Console.WriteLine($"Received message: {receivedMessage}");
+            Console.WriteLine($"{userName} said: {receivedMessage}");
             chatHistory.Add(receivedMessage);
         });
 
-        _client.On("userJoined", response =>
+        _client.On("Joined:", response =>
         {
             string newUser = response.GetValue<string>();
-            Console.WriteLine($"{userName} Joined chat");
         });
-
-        _client.On("userLeft", response =>
-        {
-            string newUser = response.GetValue<string>();
-            Console.WriteLine($"{userName} Left chat");
-        });
-
+        
         _client.OnConnected += async (sender, args) =>
         {
             Console.WriteLine("Connected");
-            await _client.EmitAsync("userJoined", userName);
+            await _client.EmitAsync("Joined:", userName);
         };
         
         _client.OnDisconnected += async (sender, args) =>
         {
-            await _client.EmitAsync("userLeft", userName);
             Console.WriteLine("Disconnected");
         };
         
@@ -56,7 +48,14 @@ public class SocketManager
     {
         string ownMessage = $"{message.Time}: You said: {message.Text}";
         chatHistory.Add(ownMessage);
-        await _client.EmitAsync("message", message);
+        await _client.EmitAsync("message:", message);
         Console.WriteLine($"{message.Time} {message.Sender} said: {message.Text}");
     }
+
+    public static async Task Disconnect(string userName)
+    {
+        await _client.EmitAsync("Left:", userName);
+        await _client.DisconnectAsync();
+    }
+    
 }

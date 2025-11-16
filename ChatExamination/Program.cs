@@ -1,13 +1,5 @@
 ﻿namespace ChatExamination;
-using SocketIOClient;
 
-/*public class Message
-{
-    public string Text { get; set; }
-    public string Sender { get; set; }
-    public string Time { get; set; }
-}
-*/
 class Program
 {
     static async Task Main(string[] args)
@@ -43,9 +35,12 @@ class Program
                 }
                 continue;
             }
-            
+
             if (input == "/exit")
+            {
+                await SocketManager.Disconnect(userName);
                 break;
+            }
                 
             var message =  new Messages
             {
@@ -60,5 +55,3 @@ class Program
         Console.WriteLine("Exiting program");
     }
 }
-        
-    
