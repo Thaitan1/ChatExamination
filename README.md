@@ -6,6 +6,6 @@
 /exit - avsluta program
 
 Events(postman):
-Joined:
-Left:
-message:
+Joined
+Left
+message
