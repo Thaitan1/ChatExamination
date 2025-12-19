@@ -49,7 +49,7 @@ class Program
                 break;
             }
 
-            var message = new Messages(input, userName, time);
+            var message = new Messages(time, userName, input);
 
             
             await SocketManager.SendMessage(message);

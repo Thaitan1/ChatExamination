@@ -272,11 +272,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Desktop\\ChatExamitation\\ChatExamination\\ChatExamination.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\School\\ChatExamitation\\ChatExamination\\ChatExamination.csproj",
       "projectName": "ChatExamination",
-      "projectPath": "C:\\Users\\PC\\Desktop\\ChatExamitation\\ChatExamination\\ChatExamination.csproj",
+      "projectPath": "C:\\Users\\PC\\Desktop\\School\\ChatExamitation\\ChatExamination\\ChatExamination.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Desktop\\ChatExamitation\\ChatExamination\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\School\\ChatExamitation\\ChatExamination\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
